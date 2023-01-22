@@ -8,6 +8,7 @@ pkgname=('vulkan-mesa-layers' 'opencl-mesa' 'vulkan-intel' 'vulkan-radeon' 'vulk
 pkgdesc="An open-source implementation of the OpenGL specification"
 pkgver=22.3.3
 pkgrel=3
+epoch=1
 arch=('x86_64')
 makedepends=('python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
@@ -17,6 +18,7 @@ makedepends+=('rust' 'rust-bindgen' 'spirv-tools' 'spirv-llvm-translator') # ru
 url="https://www.mesa3d.org/"
 license=('custom')
 options=('!lto')
+codecs="vc1dec,h264dec,h264enc,h265dec,h265enc"
 source=(https://mesa.freedesktop.org/archive/mesa-${pkgver}.tar.xz{,.sig}
         0001-anv-force-MEDIA_INTERFACE_DESCRIPTOR_LOAD-reemit-aft.patch
         0002-iris-Retry-DRM_IOCTL_I915_GEM_EXECBUFFER2-on-ENOMEM.patch
@@ -79,6 +81,7 @@ build() {
     -D osmesa=true \
     -D shared-glapi=enabled \
     -D microsoft-clc=disabled \
+    -D video-codecs=$codecs \
     -D valgrind=enabled
 
   # Print config

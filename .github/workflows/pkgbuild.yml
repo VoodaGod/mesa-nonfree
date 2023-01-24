@@ -23,6 +23,7 @@ jobs:
     strategy:
       matrix:
         archlinux_arch: [aarch64, x86_64]
+        branch: [stable, testing, unstable]
         include:
           - archlinux_arch: aarch64
             docker_arch: aarch64
@@ -39,6 +40,7 @@ jobs:
         uses: Manjaro-Sway/manjaro-package-action@main
         with:
           docker_arch: ${{ matrix.docker_arch }}
+          branch: ${{ matrix.branch }}
           archlinux_arch: ${{ matrix.archlinux_arch }}
           gpg_keyid: ${{ secrets.GPG_KEYID }}
           gpg_signing_key_base64: ${{ secrets.GPG_SECRET_KEY_BASE64 }}
